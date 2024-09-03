@@ -10,9 +10,9 @@ installApps()
     echo "       You also must have Docker-Compose for NGinX Proxy Manager to be installed."
     echo ""
     echo ""
-    
+
     ISACT=$( (sudo systemctl is-active docker ) 2>&1 )
-    ISCOMP=$( (docker-compose -v ) 2>&1 )
+    ISCOMP=$( (docker compose -v ) 2>&1 )
 
     #### Try to check whether docker is installed and running - don't prompt if it is
     if [[ "$ISACT" != "active" ]]; then
@@ -53,11 +53,11 @@ installApps()
             esac
         done
     fi
-    
+
     startInstall
 }
 
-startInstall() 
+startInstall()
 {
     clear
     echo "#######################################################"
@@ -106,8 +106,8 @@ startInstall()
         fi
 
     fi
-        
-    
+
+
     #######################################################
     ###              Install for CentOS 7 or 8          ###
     #######################################################
@@ -200,7 +200,7 @@ startInstall()
         echo "######     Install Docker-Compose     ######"
         echo "############################################"
 
-        # install docker-compose
+        # install docker compose
         echo ""
         echo "    1. Installing Docker-Compose..."
         echo ""
@@ -209,10 +209,10 @@ startInstall()
 
         ######################################
         ###     Install Debian / Ubuntu    ###
-        ######################################        
-        
+        ######################################
+
         if [[ "$OS" == "2" || "$OS" == "3" || "$OS" == "4" ]]; then
-            sudo apt install docker-compose -y >> ~/docker-script-install.log 2>&1
+            sudo apt install docker compose -y >> ~/docker-script-install.log 2>&1
         fi
 
         ######################################
@@ -231,13 +231,13 @@ startInstall()
 
         if [[ "$OS" == "5" ]]; then
             sudo pacman -Sy >> ~/docker-script-install.log 2>&1
-            sudo pacman -Sy docker-compose > ~/docker-script-install.log 2>&1
+            sudo pacman -Sy docker compose > ~/docker-script-install.log 2>&1
         fi
 
         echo ""
 
-        echo "      - Docker Compose Version is now: " 
-        DOCKCOMPV=$(docker-compose --version)
+        echo "      - Docker Compose Version is now: "
+        DOCKCOMPV=$(docker compose --version)
         echo "        "${DOCKCOMPV}
         echo ""
         echo ""
@@ -273,25 +273,25 @@ startInstall()
         echo "##########################################"
         echo "###     Install NGinX Proxy Manager    ###"
         echo "##########################################"
-    
-        # pull an nginx proxy manager docker-compose file from github
-        echo "    1. Pulling a default NGinX Proxy Manager docker-compose.yml file."
+
+        # pull an nginx proxy manager docker compose file from github
+        echo "    1. Pulling a default NGinX Proxy Manager docker compose.yml file."
 
         mkdir -p docker/nginx-proxy-manager
         cd docker/nginx-proxy-manager
 
         curl https://gitlab.com/bmcgonag/docker_installs/-/raw/main/docker_compose.nginx_proxy_manager.yml -o docker-compose.yml >> ~/docker-script-install.log 2>&1
 
-        echo "    2. Running the docker-compose.yml to install and start NGinX Proxy Manager"
+        echo "    2. Running the docker compose.yml to install and start NGinX Proxy Manager"
         echo ""
         echo ""
 
         if [[ "$OS" == "1" ]]; then
-          docker-compose up -d
+          docker compose up -d
         fi
 
         if [[ "$OS" != "1" ]]; then
-          sudo docker-compose up -d
+          sudo docker compose up -d
         fi
 
         echo ""
@@ -303,7 +303,7 @@ startInstall()
         echo "        username: admin@example.com"
         echo "        password: changeme"
 
-        echo ""       
+        echo ""
         sleep 3s
         cd
     fi
@@ -358,25 +358,25 @@ startInstall()
         mkdir -p docker/navidrome
         cd docker/navidrome
 
-        curl https://gitlab.com/bmcgonag/docker_installs/-/raw/main/docker_compose_navidrome.yml -o docker-compose.yml >> ~/docker-script-install.log 2>&1
+        curl https://gitlab.com/bmcgonag/docker_installs/-/raw/main/docker_compose_navidrome.yml -o docker compose.yml >> ~/docker-script-install.log 2>&1
 
-        echo "    2. Running the docker-compose.yml to install and start Navidrome"
+        echo "    2. Running the docker compose.yml to install and start Navidrome"
         echo ""
         echo ""
 
         if [[ "$OS" == "1" ]]; then
-          docker-compose up -d
+          docker compose up -d
         fi
 
         if [[ "$OS" != "1" ]]; then
-          sudo docker-compose up -d
+          sudo docker compose up -d
         fi
 
         echo ""
         echo ""
         echo "    Navigate to your server hostname / IP address on port 4533 to setup"
         echo "    your new Navidrome admin account."
-        echo ""      
+        echo ""
         sleep 3s
         cd
     fi
