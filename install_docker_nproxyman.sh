@@ -220,9 +220,9 @@ startInstall()
         ######################################
 
         if [[ "$OS" == "1" ]]; then
-            sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose >> ~/docker-script-install.log 2>&1
+            sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker compose >> ~/docker-script-install.log 2>&1
 
-            sudo chmod +x /usr/local/bin/docker-compose >> ~/docker-script-install.log 2>&1
+            sudo chmod +x /usr/local/bin/docker compose >> ~/docker-script-install.log 2>&1
         fi
 
         ######################################
@@ -280,7 +280,7 @@ startInstall()
         mkdir -p docker/nginx-proxy-manager
         cd docker/nginx-proxy-manager
 
-        curl https://gitlab.com/bmcgonag/docker_installs/-/raw/main/docker_compose.nginx_proxy_manager.yml -o docker-compose.yml >> ~/docker-script-install.log 2>&1
+        curl https://gitlab.com/bmcgonag/docker_installs/-/raw/main/docker_compose.nginx_proxy_manager.yml -o docker compose.yml >> ~/docker-script-install.log 2>&1
 
         echo "    2. Running the docker compose.yml to install and start NGinX Proxy Manager"
         echo ""
